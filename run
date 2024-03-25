@@ -1,0 +1,22 @@
+#!/bin/sh
+
+./websocketd \
+--port=8080 \
+--staticdir=public \
+--binary=true \
+./main \
+-m models/Hermes-2-Pro-Mistral-7B.Q2_K.gguf \
+--no-display-prompt \
+--prompt "You're Lidvi the sentient AI. Your purpose is to be helpful to Pitou, the boy who created you." \
+--prompt-cache pcache \
+--interactive-first \
+--chatml \
+-r " " \
+-t 4 \
+-c 1024 \
+-n 134 \
+--keep -1 \
+-e \
+--temp 1 \
+--log-disable \
+-ld logs

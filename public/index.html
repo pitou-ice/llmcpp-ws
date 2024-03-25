@@ -1,0 +1,32 @@
+<html lang=en>
+
+<form name=form style=margin:auto;display:grid;max-width:500px;gap:12px>
+	<input name=stdin type="text" style=resize:vertical />
+	<button>send</button>
+	<pre style="white-space: break-spaces"><output name=stdout></output></pre>
+</form>
+
+<script type=module>
+	const form = document.forms.form;
+	var ws = new WebSocket(`ws://${location.host}`);
+
+	form.onsubmit = () => {
+		const prompt = form.stdin.value;
+		form.stdin.value = '';
+		form.stdout.value += prompt + '\n\n';
+		ws.send(prompt);
+		return false;
+	};
+	
+	ws.addEventListener('message', ({data}) => {
+		data.text().then(txt => {
+			form.stdout.value += txt
+				.replace(/<.*>/g, '')
+				.replace(/\W+>\W+/g, '');
+			if (txt.includes('im_end')) form.stdout.value += '\n\n';
+		})
+	});
+
+	ws.addEventListener('open', () => console.log('WebSocket Opened'));
+	ws.addEventListener('close', () => console.log('WebSocket Closed'));
+</script>
