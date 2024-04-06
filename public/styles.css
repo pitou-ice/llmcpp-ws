@@ -1,0 +1,83 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: 'Ubuntu';
+  color: #222;
+  font-size: 0.8rem;
+
+  display: grid;
+  grid-template-columns: 70% 30%;
+  /* grid-template-columns: 1fr 0fr; */
+  grid-template-rows: 1fr;
+  background: linear-gradient(#def, #def, #fff);
+  background-repeat: no-repeat;
+}
+
+#Container {
+  user-select: none;
+}
+
+#Form {
+  padding: 24px;
+  gap: 12px;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+#Output {
+  gap: 12px;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#Output > p {
+  margin: 0;
+  padding: 6px;
+  border-radius: 12px;
+  border: solid 1px #fff;
+}
+
+#Output > p.user-msg {
+  background-color: #fffa;
+}
+
+#Output > p.bot-msg {
+  background-color: #defa;
+}
+
+#Input {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: end;
+  gap: 6px;
+}
+
+#Input > * {
+  border-radius: 12px;
+  border: solid 1px #eee;
+}
+
+#Input > button {
+  width: fit-content;
+}
+
+@media (orientation: portrait) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 70% 30%;
+  }
+}
